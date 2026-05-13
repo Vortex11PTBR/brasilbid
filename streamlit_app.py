@@ -62,8 +62,11 @@ st.markdown("""
 # ── Conexão BD ────────────────────────────────────────────────────────────────
 @st.cache_resource
 def get_engine():
-    url = os.environ["DATABASE_URL"]
-    # Garante dialeto psycopg3 (funciona com Python 3.12+/3.14+)
+    # Streamlit Cloud secrets têm prioridade; fallback para env var local
+    url = st.secrets.get("DATABASE_URL") or os.environ.get("DATABASE_URL")
+    if not url:
+        st.error("❌ DATABASE_URL não configurado. Vá em Settings → Secrets e adicione a variável.")
+        st.stop()
     url = url.replace("postgresql://", "postgresql+psycopg://", 1)
     url = url.replace("postgres://", "postgresql+psycopg://", 1)
     return create_engine(url, pool_pre_ping=True)
@@ -71,8 +74,12 @@ def get_engine():
 
 @st.cache_data(ttl=3600, show_spinner="Carregando dados...")
 def load_mart(table: str) -> pd.DataFrame:
-    with get_engine().connect() as conn:
-        return pd.read_sql(f"SELECT * FROM public_mart.{table}", conn)
+    try:
+        with get_engine().connect() as conn:
+            return pd.read_sql(f"SELECT * FROM public_mart.{table}", conn)
+    except Exception as e:
+        st.error(f"❌ Erro ao carregar `{table}`: {e}")
+        st.stop()
 
 
 def fmt_brl(v) -> str:
