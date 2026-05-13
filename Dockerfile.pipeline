@@ -1,0 +1,24 @@
+# ── BrasilBid — Pipeline ETL + dbt ──────────────────────────────────────────
+FROM python:3.12-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        git \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements-dbt.txt .
+RUN pip install --no-cache-dir -r requirements-dbt.txt
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY run_ingestion.py .
+COPY ingestion/ ingestion/
+COPY scripts/ scripts/
+COPY dbt/ dbt/
+
+ENV PYTHONPATH=/app
+
+# Roda: ingestão → gera profiles.yml → dbt run → dbt test
+CMD ["sh", "-c", "python run_ingestion.py && python scripts/gen_profiles.py && dbt run --project-dir dbt --profiles-dir dbt && dbt test --project-dir dbt --profiles-dir dbt"]

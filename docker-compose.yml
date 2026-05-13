@@ -1,0 +1,48 @@
+services:
+
+  # ── Dashboard Streamlit ───────────────────────────────────────────────────
+  app:
+    build: .
+    ports:
+      - "8501:8501"
+    env_file: .env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      start-period: 30s
+      retries: 3
+
+  # ── Pipeline ETL + dbt (execução única) ──────────────────────────────────
+  pipeline:
+    build:
+      context: .
+      dockerfile: Dockerfile.pipeline
+    env_file: .env
+    profiles:
+      - pipeline
+
+  # ── PostgreSQL local (desenvolvimento sem Neon) ───────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: brasilbid_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: brasilbid
+      POSTGRES_USER: brasilbid
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-brasilbid_dev}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U brasilbid -d brasilbid"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    profiles:
+      - local-db
+
+volumes:
+  pgdata:
