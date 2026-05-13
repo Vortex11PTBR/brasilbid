@@ -1,0 +1,85 @@
+# ── BrasilBid — Stack Apache Airflow ─────────────────────────────────────────
+# Uso: docker compose -f docker-compose.airflow.yml up
+# Interface: http://localhost:8080  (admin / admin)
+#
+# Requer: arquivo .env com DATABASE_URL do Neon
+
+x-airflow-common: &airflow-common
+  build:
+    context: .
+    dockerfile: Dockerfile.airflow
+  environment:
+    AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres-airflow:5432/airflow
+    AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+    AIRFLOW__WEBSERVER__EXPOSE_CONFIG: "true"
+    PYTHONPATH: /opt/airflow/project
+  env_file: .env
+  volumes:
+    - ./dags:/opt/airflow/dags
+    - ./ingestion:/opt/airflow/project/ingestion
+    - ./scripts:/opt/airflow/project/scripts
+    - ./dbt:/opt/airflow/project/dbt
+    - ./run_ingestion.py:/opt/airflow/project/run_ingestion.py
+    - airflow-logs:/opt/airflow/logs
+  depends_on:
+    postgres-airflow:
+      condition: service_healthy
+
+services:
+
+  # ── Banco de metadados do Airflow (separado do BrasilBid) ─────────────────
+  postgres-airflow:
+    image: postgres:16-alpine
+    container_name: brasilbid_airflow_db
+    environment:
+      POSTGRES_DB: airflow
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+    volumes:
+      - airflow-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U airflow -d airflow"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ── Inicialização (roda uma vez) ──────────────────────────────────────────
+  airflow-init:
+    <<: *airflow-common
+    container_name: brasilbid_airflow_init
+    command: >
+      bash -c "
+        airflow db migrate &&
+        airflow users create
+          --username admin --password admin
+          --firstname Admin --lastname User
+          --role Admin --email admin@brasilbid.dev
+      "
+    restart: on-failure
+
+  # ── Webserver (UI em :8080) ───────────────────────────────────────────────
+  airflow-webserver:
+    <<: *airflow-common
+    container_name: brasilbid_airflow_web
+    command: airflow webserver
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 60s
+      retries: 5
+
+  # ── Scheduler (executa os DAGs) ───────────────────────────────────────────
+  airflow-scheduler:
+    <<: *airflow-common
+    container_name: brasilbid_airflow_scheduler
+    command: airflow scheduler
+    restart: unless-stopped
+
+volumes:
+  airflow-pgdata:
+  airflow-logs:

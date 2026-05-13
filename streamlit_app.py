@@ -230,10 +230,10 @@ with st.sidebar:
       <b>📡 Fonte</b><br>PNCP — Portal Nacional de Contratações Públicas
     </div>
     <div class="sidebar-info">
-      <b>🔄 Atualização</b><br>Diária às 05:00 BRT via GitHub Actions
+      <b>🔄 Atualização</b><br>Diária às 05:00 BRT via Airflow + GitHub Actions
     </div>
     <div class="sidebar-info">
-      <b>🗄️ Stack</b><br>Python → PostgreSQL → dbt → Streamlit
+      <b>🗄️ Stack</b><br>Python → PostgreSQL → dbt → FastAPI → Streamlit
     </div>
     """, unsafe_allow_html=True)
 
