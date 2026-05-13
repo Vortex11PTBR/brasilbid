@@ -1,14 +1,28 @@
 """Cliente da API pública do PNCP."""
+import logging
 import time
 import requests
 from datetime import date
 from typing import Generator
+
+log = logging.getLogger(__name__)
 
 BASE = "https://pncp.gov.br/api/consulta/v1"
 PAGE_SIZE = 50
 
 # Todas as modalidades disponíveis na API
 MODALIDADES = [1, 2, 3, 4, 5, 6, 7, 8]
+
+MODALIDADE_NOMES = {
+    1: "Leilão",
+    2: "Diálogo Competitivo",
+    3: "Concurso",
+    4: "Concorrência",
+    5: "Pregão",
+    6: "Manifestação de Interesse",
+    7: "Pré-qualificação",
+    8: "Credenciamento",
+}
 
 SESSION = requests.Session()
 SESSION.headers.update({"Accept": "application/json", "User-Agent": "BrasilBid/1.0"})
@@ -23,10 +37,12 @@ def _get(url: str, params: dict, retries: int = 3) -> dict | None:
             r.raise_for_status()
             return r.json()
         except requests.RequestException as e:
+            wait = 2 ** attempt
             if attempt == retries - 1:
-                print(f"  ⚠️  {url} {params} → {e}")
+                log.warning("Falha após %d tentativas: %s %s → %s", retries, url, params, e)
                 return None
-            time.sleep(2 ** attempt)
+            log.debug("Tentativa %d/%d falhou, aguardando %ds: %s", attempt + 1, retries, wait, e)
+            time.sleep(wait)
     return None
 
 
@@ -38,7 +54,9 @@ def fetch_contratacoes(
     fmt = lambda d: d.strftime("%Y%m%d")
 
     for modalidade in MODALIDADES:
+        nome = MODALIDADE_NOMES.get(modalidade, str(modalidade))
         pagina = 1
+        total_modal = 0
         while True:
             data = _get(
                 f"{BASE}/contratacoes/publicacao",
@@ -57,10 +75,12 @@ def fetch_contratacoes(
             if not items:
                 break
 
+            total_modal += len(items)
             yield from items
 
             total = data.get("totalRegistros", 0)
             if pagina * PAGE_SIZE >= total:
+                log.info("Modalidade %-25s → %4d registros", nome, total_modal)
                 break
             pagina += 1
             time.sleep(0.3)  # respeitar rate limit

@@ -1,20 +1,15 @@
 """Conexão e schema PostgreSQL (Neon)."""
+import logging
 import os
-from sqlalchemy import (
-    create_engine, text, Column, Text, Integer, Numeric,
-    TIMESTAMP, Index
-)
-from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped
+from sqlalchemy import create_engine, text
 from dotenv import load_dotenv
+
+log = logging.getLogger(__name__)
 
 load_dotenv()
 
 DATABASE_URL = os.environ["DATABASE_URL"]
 engine = create_engine(DATABASE_URL, pool_pre_ping=True)
-
-
-class Base(DeclarativeBase):
-    pass
 
 
 DDL = """
@@ -51,4 +46,4 @@ def init_db() -> None:
     with engine.connect() as conn:
         conn.execute(text(DDL))
         conn.commit()
-    print("✅ Schema OK")
+    log.info("Schema PostgreSQL OK")

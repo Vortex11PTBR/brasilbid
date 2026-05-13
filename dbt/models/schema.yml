@@ -4,25 +4,94 @@ sources:
   - name: public
     database: neondb
     schema: public
+    loaded_at_field: ingested_at
+    freshness:
+      warn_after:  {count: 25, period: hour}
+      error_after: {count: 49, period: hour}
     tables:
       - name: licitacoes
         description: "Licitações brutas ingeridas da API PNCP"
+        columns:
+          - name: numero_controle_pncp
+            description: "Identificador único PNCP — PK"
+            tests:
+              - not_null
+              - unique
+          - name: modalidade_id
+            description: "Código da modalidade (1–8 conforme PNCP)"
+            tests:
+              - not_null
+              - accepted_values:
+                  values: [1, 2, 3, 4, 5, 6, 7, 8]
+          - name: data_publicacao
+            tests:
+              - not_null
 
 models:
   - name: stg_licitacoes
-    description: "Staging: dados limpos e tipificados"
+    description: "Staging: dados limpos, tipificados e normalizados da tabela raw"
+    columns:
+      - name: numero_controle_pncp
+        description: "PK: identificador único da licitação"
+        tests:
+          - not_null
+          - unique
+      - name: uf_sigla
+        description: "Sigla do estado (UF) em maiúsculas"
+        tests:
+          - not_null
+      - name: valor_estimado
+        description: "Valor estimado; COALESCE(null, 0)"
+        tests:
+          - not_null
+      - name: data_publicacao
+        tests:
+          - not_null
 
   - name: mart_por_uf
-    description: "Agregação por estado (UF) para mapa Power BI"
+    description: "Agregação por estado (UF) — gráfico de barras e mapa no Power BI"
+    columns:
+      - name: uf_sigla
+        description: "PK: sigla do estado"
+        tests:
+          - not_null
+          - unique
 
   - name: mart_por_modalidade
-    description: "Distribuição por modalidade de licitação"
+    description: "Distribuição percentual por modalidade de licitação"
+    columns:
+      - name: modalidade_nome
+        tests:
+          - not_null
 
   - name: mart_por_orgao
-    description: "Ranking de órgãos por volume e valor"
+    description: "Ranking de órgãos por volume e valor total"
+    columns:
+      - name: orgao_cnpj
+        tests:
+          - not_null
 
   - name: mart_timeline
-    description: "Série temporal diária de publicações"
+    description: "Série temporal diária de publicações por modalidade"
 
   - name: mart_recentes
-    description: "Últimas 500 licitações para tabela detalhada"
+    description: "Últimas 500 licitações para tabela detalhada no Power BI"
+
+  - name: mart_oportunidades
+    description: "Licitações abertas com encerramento futuro — oportunidades ativas para fornecedores"
+    columns:
+      - name: numero_controle_pncp
+        tests:
+          - not_null
+          - unique
+      - name: dias_restantes
+        description: "Dias até encerramento da proposta (>= 0)"
+        tests:
+          - not_null
+
+  - name: mart_por_municipio
+    description: "Agregação por município — granularidade abaixo do estado"
+    columns:
+      - name: municipio_nome
+        tests:
+          - not_null

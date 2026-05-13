@@ -1,12 +1,17 @@
-name: PNCP Daily Ingestion
+name: PNCP Daily Pipeline
 
 on:
   schedule:
     - cron: "0 8 * * *"   # 05:00 BRT todos os dias
-  workflow_dispatch:       # permite rodar manualmente
+  workflow_dispatch:
+    inputs:
+      days:
+        description: 'Número de dias para ingerir'
+        default: '2'
+        required: false
 
 jobs:
-  ingest:
+  pipeline:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,7 +24,30 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run ingestion
+      # ── Etapa 1: ingestão PNCP → PostgreSQL ─────────────────────────────
+      - name: Run ETL ingestion
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: python run_ingestion.py --days 2
+        run: python run_ingestion.py --days ${{ github.event.inputs.days || '2' }}
+
+      # ── Etapa 2: gerar profiles.yml do dbt a partir da DATABASE_URL ──────
+      - name: Generate dbt profiles
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: python scripts/gen_profiles.py
+
+      # ── Etapa 3: transformações dbt (staging → marts) ────────────────────
+      - name: Run dbt models
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          cd dbt
+          dbt run --profiles-dir .
+
+      # ── Etapa 4: testes de qualidade de dados ────────────────────────────
+      - name: Run dbt tests
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          cd dbt
+          dbt test --profiles-dir .
