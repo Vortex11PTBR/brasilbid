@@ -63,6 +63,9 @@ st.markdown("""
 @st.cache_resource
 def get_engine():
     url = os.environ["DATABASE_URL"]
+    # Garante dialeto psycopg3 (funciona com Python 3.12+/3.14+)
+    url = url.replace("postgresql://", "postgresql+psycopg://", 1)
+    url = url.replace("postgres://", "postgresql+psycopg://", 1)
     return create_engine(url, pool_pre_ping=True)
 
 
