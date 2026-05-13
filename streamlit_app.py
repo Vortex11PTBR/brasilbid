@@ -9,7 +9,6 @@ import ssl
 import pandas as pd
 import plotly.express as px
 import streamlit as st
-import streamlit.components.v1 as components
 from sqlalchemy import create_engine
 
 # ── Configuração da página ─────────────────────────────────────────────────────
@@ -190,9 +189,12 @@ def get_engine():
 
 
 @st.cache_data(ttl=3600, show_spinner="Carregando dados...")
-def load_mart(table: str) -> pd.DataFrame:
+def load_mart(table: str, limit: int = 0) -> pd.DataFrame:
+    query = f"SELECT * FROM public_mart.{table}"
+    if limit:
+        query += f" LIMIT {limit}"
     with get_engine().connect() as conn:
-        return pd.read_sql(f"SELECT * FROM public_mart.{table}", conn)
+        return pd.read_sql(query, conn)
 
 
 def fmt_brl(v) -> str:
@@ -364,7 +366,7 @@ with tab2:
     </div>
     """, unsafe_allow_html=True)
 
-    df_op = load_mart("mart_oportunidades")
+    df_op = load_mart("mart_oportunidades", limit=300)
 
     if df_op.empty:
         st.info("Nenhuma oportunidade ativa no momento. O pipeline roda diariamente às 05:00 BRT.")
@@ -524,10 +526,7 @@ with tab4:
 # ═══════════════════════════════════════════════════════════════════════════════
 # TAB 5 — Power BI
 # ═══════════════════════════════════════════════════════════════════════════════
-POWERBI_URL = (
-    "https://app.powerbi.com/view?r=eyJrIjoiYjQzNDdiMmMtMzczMi00MmY0LWIyZjMtMDg2NTEwNTUzZjE2Iiwidci"
-    "I6ImY5OTZjZmRiLTQyYWMtNGVhZC1iYzQzLThmZmY3Njc0Zjg4NiIsImMiOjR9&pageName=c90308a9d2662513e95b"
-)
+POWERBI_URL = "https://app.powerbi.com/view?r=eyJrIjoiYjQzNDdiMmMtMzczMi00MmY0LWIyZjMtMDg2NTEwNTUzZjE2IiwidCI6ImY5OTZjZmRiLTQyYWMtNGVhZC1iYzQzLThmZmY3Njc0Zjg4NiIsImMiOjR9&pageName=c90308a9d2662513e95b"
 
 with tab5:
     st.markdown("""
@@ -539,12 +538,17 @@ with tab5:
     </div>
     """, unsafe_allow_html=True)
 
-    components.iframe(POWERBI_URL, height=700, scrolling=True)
+    st.markdown(
+        f'<iframe src="{POWERBI_URL}" width="100%" height="700" '
+        f'frameborder="0" allowfullscreen="true" '
+        f'style="border:1px solid #21262d;border-radius:10px;background:#161b22;"></iframe>',
+        unsafe_allow_html=True,
+    )
 
     st.markdown(
-        f'<div style="text-align:center;margin-top:0.5rem">'
+        f'<div style="text-align:center;margin-top:0.8rem">'
         f'<a href="{POWERBI_URL}" target="_blank" style="color:#8b949e;font-size:0.78rem;'
-        f'text-decoration:none;border:1px solid #21262d;border-radius:6px;padding:4px 12px;">'
-        f'↗ Abrir em tela cheia</a></div>',
+        f'text-decoration:none;border:1px solid #21262d;border-radius:6px;padding:4px 14px;">'
+        f'↗ Abrir em tela cheia no Power BI</a></div>',
         unsafe_allow_html=True,
     )
