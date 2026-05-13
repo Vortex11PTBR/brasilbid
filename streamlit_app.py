@@ -9,6 +9,7 @@ import ssl
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+import streamlit.components.v1 as components
 from sqlalchemy import create_engine
 
 # ── Configuração da página ─────────────────────────────────────────────────────
@@ -251,11 +252,12 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ── Tabs ──────────────────────────────────────────────────────────────────────
-tab1, tab2, tab3, tab4 = st.tabs([
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "📊  Visão Geral",
     "🟢  Oportunidades Ativas",
     "📈  Evolução Temporal",
     "🏆  Ranking de Órgãos",
+    "📑  Power BI",
 ])
 
 
@@ -510,10 +512,39 @@ with tab4:
         st.plotly_chart(fig_org, use_container_width=True)
 
     with col_r2:
-        st.markdown("#### Por valor total estimado")
+        st.markdown('<p class="section-title">Por valor total estimado</p>', unsafe_allow_html=True)
         df_val_top = df_org_f.nlargest(15, "valor_total_estimado")[
             ["orgao_nome", "uf_sigla", "valor_total_estimado", "total_licitacoes"]
         ].copy()
         df_val_top["valor_total_estimado"] = df_val_top["valor_total_estimado"].apply(fmt_brl)
         df_val_top.columns = ["Órgão", "UF", "Valor Total", "Licitações"]
         st.dataframe(df_val_top, use_container_width=True, hide_index=True)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TAB 5 — Power BI
+# ═══════════════════════════════════════════════════════════════════════════════
+POWERBI_URL = (
+    "https://app.powerbi.com/view?r=eyJrIjoiYjQzNDdiMmMtMzczMi00MmY0LWIyZjMtMDg2NTEwNTUzZjE2Iiwidci"
+    "I6ImY5OTZjZmRiLTQyYWMtNGVhZC1iYzQzLThmZmY3Njc0Zjg4NiIsImMiOjR9&pageName=c90308a9d2662513e95b"
+)
+
+with tab5:
+    st.markdown("""
+    <div class="hero" style="padding:1rem 1.5rem;margin-bottom:1rem">
+      <p style="color:#e6edf3;font-size:1rem;font-weight:700;margin:0">📑 Dashboard Power BI</p>
+      <p style="color:#8b949e;font-size:0.8rem;margin:2px 0 0 0">
+        Relatório interativo com visões de UF, modalidade, órgão e evolução temporal · DAX + Power Query
+      </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    components.iframe(POWERBI_URL, height=700, scrolling=True)
+
+    st.markdown(
+        f'<div style="text-align:center;margin-top:0.5rem">'
+        f'<a href="{POWERBI_URL}" target="_blank" style="color:#8b949e;font-size:0.78rem;'
+        f'text-decoration:none;border:1px solid #21262d;border-radius:6px;padding:4px 12px;">'
+        f'↗ Abrir em tela cheia</a></div>',
+        unsafe_allow_html=True,
+    )
