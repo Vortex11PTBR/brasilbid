@@ -1,0 +1,28 @@
+version: 2
+
+sources:
+  - name: public
+    database: neondb
+    schema: public
+    tables:
+      - name: licitacoes
+        description: "Licitações brutas ingeridas da API PNCP"
+
+models:
+  - name: stg_licitacoes
+    description: "Staging: dados limpos e tipificados"
+
+  - name: mart_por_uf
+    description: "Agregação por estado (UF) para mapa Power BI"
+
+  - name: mart_por_modalidade
+    description: "Distribuição por modalidade de licitação"
+
+  - name: mart_por_orgao
+    description: "Ranking de órgãos por volume e valor"
+
+  - name: mart_timeline
+    description: "Série temporal diária de publicações"
+
+  - name: mart_recentes
+    description: "Últimas 500 licitações para tabela detalhada"

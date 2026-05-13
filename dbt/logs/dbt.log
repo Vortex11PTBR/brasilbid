@@ -1,0 +1,579 @@
+[0m15:23:12.090542 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023130DBA480>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023130BB23C0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002313509A690>]}
+
+
+============================== 15:23:12.113054 | 0f0d1e27-1739-4a7c-acdf-4c0b6adf78f7 ==============================
+[0m15:23:12.113054 [info ] [MainThread]: Running with dbt=1.12.0-b1
+[0m15:23:12.114054 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': '.', 'invocation_command': 'dbt debug --profiles-dir .', 'indirect_selection': 'eager', 'use_colors': 'True', 'use_experimental_parser': 'False', 'log_path': 'C:\\Users\\joaop\\OneDrive\\Desktop\\brasilibid\\dbt\\logs'}
+[0m15:23:12.376628 [info ] [MainThread]: dbt version: 1.12.0-b1
+[0m15:23:12.377625 [info ] [MainThread]: python version: 3.12.10
+[0m15:23:12.377625 [info ] [MainThread]: python path: C:\Users\joaop\OneDrive\Desktop\brasilibid\.venv\Scripts\python.exe
+[0m15:23:12.378625 [info ] [MainThread]: os info: Windows-11-10.0.26200-SP0
+[0m15:23:12.442144 [info ] [MainThread]: Using profiles dir at .
+[0m15:23:12.442144 [info ] [MainThread]: Using profiles.yml file at .\profiles.yml
+[0m15:23:12.443146 [info ] [MainThread]: Using dbt_project.yml file at C:\Users\joaop\OneDrive\Desktop\brasilibid\dbt\dbt_project.yml
+[0m15:23:12.444146 [info ] [MainThread]: adapter type: postgres
+[0m15:23:12.445145 [info ] [MainThread]: adapter version: 1.10.0
+[0m15:23:12.595978 [info ] [MainThread]: Configuration:
+[0m15:23:12.596976 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m15:23:12.597977 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m15:23:12.597977 [info ] [MainThread]: Required dependencies:
+[0m15:23:12.598976 [debug] [MainThread]: Executing "git --help"
+[0m15:23:12.658979 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Reset current HEAD to the specified state\n   switch     Switch branches\n   tag        Create, list, delete or verify tags\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m15:23:12.659979 [debug] [MainThread]: STDERR: "b''"
+[0m15:23:12.660978 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m15:23:12.661979 [info ] [MainThread]: Connection:
+[0m15:23:12.662981 [info ] [MainThread]:   host: ep-super-haze-apnkqj88-pooler.c-7.us-east-1.aws.neon.tech
+[0m15:23:12.663979 [info ] [MainThread]:   port: 5432
+[0m15:23:12.663979 [info ] [MainThread]:   user: neondb_owner
+[0m15:23:12.664980 [info ] [MainThread]:   database: neondb
+[0m15:23:12.664980 [info ] [MainThread]:   schema: public
+[0m15:23:12.665980 [info ] [MainThread]:   connect_timeout: 30
+[0m15:23:12.665980 [info ] [MainThread]:   role: None
+[0m15:23:12.666981 [info ] [MainThread]:   search_path: None
+[0m15:23:12.666981 [info ] [MainThread]:   keepalives_idle: 0
+[0m15:23:12.667979 [info ] [MainThread]:   sslmode: require
+[0m15:23:12.667979 [info ] [MainThread]:   sslcert: None
+[0m15:23:12.668982 [info ] [MainThread]:   sslkey: None
+[0m15:23:12.668982 [info ] [MainThread]:   sslrootcert: None
+[0m15:23:12.669980 [info ] [MainThread]:   application_name: dbt
+[0m15:23:12.669980 [info ] [MainThread]:   retries: 1
+[0m15:23:12.671984 [info ] [MainThread]: Registered adapter: postgres=1.10.0
+[0m15:23:13.076056 [debug] [MainThread]: Acquiring new postgres connection 'debug'
+[0m15:23:16.085140 [debug] [MainThread]: Using postgres connection "debug"
+[0m15:23:16.085140 [debug] [MainThread]: On debug: select 1 as id
+[0m15:23:16.086133 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m15:23:17.384352 [debug] [MainThread]: SQL status: SELECT 1 in 1.298 seconds
+[0m15:23:17.385358 [debug] [MainThread]: On debug: Close
+[0m15:23:17.386359 [info ] [MainThread]:   Connection test: [[32mOK connection ok[0m]
+
+[0m15:23:17.386923 [info ] [MainThread]: [32mAll checks passed![0m
+[0m15:23:17.387463 [debug] [MainThread]: Command `dbt debug` succeeded at 15:23:17.387463 after 5.47 seconds
+[0m15:23:17.387463 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m15:23:17.388471 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023133BD0F20>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000231358EC6E0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000231358ECDA0>]}
+[0m15:23:17.388471 [debug] [MainThread]: Flushing usage events
+[0m15:23:18.050850 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m15:23:25.139927 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002AAFCED57F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002AA80849D00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002AA8084A1E0>]}
+
+
+============================== 15:23:25.144928 | c668086e-ec3c-48cc-a05b-1f58d1aa1c44 ==============================
+[0m15:23:25.144928 [info ] [MainThread]: Running with dbt=1.12.0-b1
+[0m15:23:25.144928 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'False', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': '.', 'use_colors': 'True', 'indirect_selection': 'eager', 'invocation_command': 'dbt run --profiles-dir .', 'use_experimental_parser': 'False', 'log_path': 'C:\\Users\\joaop\\OneDrive\\Desktop\\brasilibid\\dbt\\logs'}
+[0m15:23:25.373835 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'c668086e-ec3c-48cc-a05b-1f58d1aa1c44', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002AA80849D00>]}
+[0m15:23:25.438362 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'c668086e-ec3c-48cc-a05b-1f58d1aa1c44', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002AA8084A6F0>]}
+[0m15:23:25.439362 [info ] [MainThread]: Registered adapter: postgres=1.10.0
+[0m15:23:25.706677 [debug] [MainThread]: checksum: 6cf294a53ec03c54809c4d08516e68832efeb493f17988cde883ee359d984f35, vars: {}, profile: brasilibid, target: prod, version: 1.12.0b1
+[0m15:23:25.707677 [info ] [MainThread]: Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m15:23:25.708678 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': 'c668086e-ec3c-48cc-a05b-1f58d1aa1c44', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002AA826F4D70>]}
+[0m15:23:28.101121 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'c668086e-ec3c-48cc-a05b-1f58d1aa1c44', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002AA82D99EE0>]}
+[0m15:23:28.199642 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\joaop\OneDrive\Desktop\brasilibid\dbt\target\manifest.json
+[0m15:23:28.221859 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\joaop\OneDrive\Desktop\brasilibid\dbt\target\semantic_manifest.json
+[0m15:23:28.270860 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'c668086e-ec3c-48cc-a05b-1f58d1aa1c44', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002AA82E33830>]}
+[0m15:23:28.271859 [info ] [MainThread]: Found 6 models, 1 source, 467 macros
+[0m15:23:28.272860 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'c668086e-ec3c-48cc-a05b-1f58d1aa1c44', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002AA82CFDE20>]}
+[0m15:23:28.275863 [info ] [MainThread]: 
+[0m15:23:28.275863 [info ] [MainThread]: Concurrency: 4 threads (target='prod')
+[0m15:23:28.275863 [info ] [MainThread]: 
+[0m15:23:28.276861 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m15:23:28.281858 [debug] [ThreadPool]: Acquiring new postgres connection 'list_neondb'
+[0m15:23:28.291859 [debug] [ThreadPool]: Acquiring new postgres connection 'list_neondb'
+[0m15:23:28.356374 [debug] [ThreadPool]: Using postgres connection "list_neondb"
+[0m15:23:28.357373 [debug] [ThreadPool]: Using postgres connection "list_neondb"
+[0m15:23:28.357373 [debug] [ThreadPool]: On list_neondb: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "connection_name": "list_neondb"} */
+
+    select distinct nspname from pg_namespace
+  
+[0m15:23:28.357373 [debug] [ThreadPool]: On list_neondb: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "connection_name": "list_neondb"} */
+
+    select distinct nspname from pg_namespace
+  
+[0m15:23:28.358377 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m15:23:28.358377 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m15:23:29.562921 [debug] [ThreadPool]: SQL status: SELECT 4 in 1.205 seconds
+[0m15:23:29.565922 [debug] [ThreadPool]: On list_neondb: Close
+[0m15:23:29.599923 [debug] [ThreadPool]: SQL status: SELECT 4 in 1.242 seconds
+[0m15:23:29.601923 [debug] [ThreadPool]: On list_neondb: Close
+[0m15:23:29.602923 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_neondb, now create_neondb_public_mart)
+[0m15:23:29.603922 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_neondb, now create_neondb_public_staging)
+[0m15:23:29.603922 [debug] [ThreadPool]: Creating schema "database: "neondb"
+schema: "public_mart"
+"
+[0m15:23:29.604924 [debug] [ThreadPool]: Creating schema "database: "neondb"
+schema: "public_staging"
+"
+[0m15:23:29.611929 [debug] [ThreadPool]: Using postgres connection "create_neondb_public_mart"
+[0m15:23:29.615930 [debug] [ThreadPool]: Using postgres connection "create_neondb_public_staging"
+[0m15:23:29.616931 [debug] [ThreadPool]: On create_neondb_public_mart: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "connection_name": "create_neondb_public_mart"} */
+create schema if not exists "public_mart"
+[0m15:23:29.616931 [debug] [ThreadPool]: On create_neondb_public_staging: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "connection_name": "create_neondb_public_staging"} */
+create schema if not exists "public_staging"
+[0m15:23:29.617930 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m15:23:29.617930 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m15:23:30.822463 [debug] [ThreadPool]: SQL status: CREATE SCHEMA in 1.205 seconds
+[0m15:23:30.824321 [debug] [ThreadPool]: On create_neondb_public_staging: COMMIT
+[0m15:23:30.824321 [debug] [ThreadPool]: Using postgres connection "create_neondb_public_staging"
+[0m15:23:30.824321 [debug] [ThreadPool]: On create_neondb_public_staging: COMMIT
+[0m15:23:30.860912 [debug] [ThreadPool]: SQL status: CREATE SCHEMA in 1.243 seconds
+[0m15:23:30.861926 [debug] [ThreadPool]: On create_neondb_public_mart: COMMIT
+[0m15:23:30.861926 [debug] [ThreadPool]: Using postgres connection "create_neondb_public_mart"
+[0m15:23:30.861926 [debug] [ThreadPool]: On create_neondb_public_mart: COMMIT
+[0m15:23:30.974464 [debug] [ThreadPool]: SQL status: COMMIT in 0.149 seconds
+[0m15:23:30.974464 [debug] [ThreadPool]: On create_neondb_public_staging: Close
+[0m15:23:31.017250 [debug] [ThreadPool]: SQL status: COMMIT in 0.154 seconds
+[0m15:23:31.017250 [debug] [ThreadPool]: On create_neondb_public_mart: Close
+[0m15:23:31.020258 [debug] [ThreadPool]: Acquiring new postgres connection 'list_neondb_public_mart'
+[0m15:23:31.026258 [debug] [ThreadPool]: Using postgres connection "list_neondb_public_mart"
+[0m15:23:31.027258 [debug] [ThreadPool]: On list_neondb_public_mart: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "connection_name": "list_neondb_public_mart"} */
+select
+      'neondb' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'public_mart'
+    union all
+    select
+      'neondb' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'public_mart'
+    union all
+    select
+      'neondb' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'public_mart'
+  
+[0m15:23:31.027258 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m15:23:31.028260 [debug] [ThreadPool]: Acquiring new postgres connection 'list_neondb_public_staging'
+[0m15:23:31.030766 [debug] [ThreadPool]: Using postgres connection "list_neondb_public_staging"
+[0m15:23:31.030766 [debug] [ThreadPool]: On list_neondb_public_staging: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "connection_name": "list_neondb_public_staging"} */
+select
+      'neondb' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'public_staging'
+    union all
+    select
+      'neondb' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'public_staging'
+    union all
+    select
+      'neondb' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'public_staging'
+  
+[0m15:23:31.031771 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m15:23:32.217618 [debug] [ThreadPool]: SQL status: SELECT 0 in 1.190 seconds
+[0m15:23:32.218574 [debug] [ThreadPool]: On list_neondb_public_mart: ROLLBACK
+[0m15:23:32.272834 [debug] [ThreadPool]: SQL status: SELECT 0 in 1.241 seconds
+[0m15:23:32.273772 [debug] [ThreadPool]: On list_neondb_public_staging: ROLLBACK
+[0m15:23:32.366396 [debug] [ThreadPool]: On list_neondb_public_mart: Close
+[0m15:23:32.427418 [debug] [ThreadPool]: On list_neondb_public_staging: Close
+[0m15:23:32.433888 [debug] [MainThread]: Using postgres connection "master"
+[0m15:23:32.434897 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "connection_name": "master"} */
+select distinct
+        dependent_namespace.nspname as dependent_schema,
+        dependent_class.relname as dependent_name,
+        referenced_namespace.nspname as referenced_schema,
+        referenced_class.relname as referenced_name
+
+    -- Query for views: views are entries in pg_class with an entry in pg_rewrite, but we avoid
+    -- a seq scan on pg_rewrite by leveraging the fact there is an "internal" row in pg_depend for
+    -- the view...
+    from pg_class as dependent_class
+    join pg_namespace as dependent_namespace on dependent_namespace.oid = dependent_class.relnamespace
+    join pg_depend as dependent_depend on dependent_depend.refobjid = dependent_class.oid
+        and dependent_depend.classid = 'pg_rewrite'::regclass
+        and dependent_depend.refclassid = 'pg_class'::regclass
+        and dependent_depend.deptype = 'i'
+
+    -- ... and via pg_depend (that has a row per column, hence the need for "distinct" above, and
+    -- making sure to exclude the internal row to avoid a view appearing to depend on itself)...
+    join pg_depend as joining_depend on joining_depend.objid = dependent_depend.objid
+        and joining_depend.classid = 'pg_rewrite'::regclass
+        and joining_depend.refclassid = 'pg_class'::regclass
+        and joining_depend.refobjid != dependent_depend.refobjid
+
+    -- ... we can find the tables they query from in pg_class, but excluding system tables. Note we
+    -- don't need need to exclude _dependent_ system tables, because they only query from other
+    -- system tables, and so are automatically excluded by excluding _referenced_ system tables
+    join pg_class as referenced_class on referenced_class.oid = joining_depend.refobjid
+    join pg_namespace as referenced_namespace on referenced_namespace.oid = referenced_class.relnamespace
+        and referenced_namespace.nspname != 'information_schema'
+        and referenced_namespace.nspname not like 'pg\_%'
+
+    order by
+        dependent_schema, dependent_name, referenced_schema, referenced_name;
+[0m15:23:32.435895 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m15:23:33.630038 [debug] [MainThread]: SQL status: SELECT 0 in 1.195 seconds
+[0m15:23:33.632051 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'c668086e-ec3c-48cc-a05b-1f58d1aa1c44', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002AA82E17FE0>]}
+[0m15:23:33.632051 [debug] [MainThread]: On master: ROLLBACK
+[0m15:23:33.780155 [debug] [MainThread]: On master: COMMIT
+[0m15:23:33.781142 [debug] [MainThread]: Using postgres connection "master"
+[0m15:23:33.781142 [debug] [MainThread]: On master: COMMIT
+[0m15:23:34.076374 [debug] [MainThread]: SQL status: COMMIT in 0.295 seconds
+[0m15:23:34.076374 [debug] [MainThread]: On master: Close
+[0m15:23:34.087958 [debug] [Thread-1 (]: Began running node model.brasilibid.stg_licitacoes
+[0m15:23:34.087958 [info ] [Thread-1 (]: 1 of 6 START sql view model public_staging.stg_licitacoes ...................... [RUN]
+[0m15:23:34.088959 [debug] [Thread-1 (]: Acquiring new postgres connection 'model.brasilibid.stg_licitacoes'
+[0m15:23:34.090041 [debug] [Thread-1 (]: Began compiling node model.brasilibid.stg_licitacoes
+[0m15:23:34.098031 [debug] [Thread-1 (]: Writing injected SQL for node "model.brasilibid.stg_licitacoes"
+[0m15:23:34.099959 [debug] [Thread-1 (]: Began executing node model.brasilibid.stg_licitacoes
+[0m15:23:34.138967 [debug] [Thread-1 (]: Writing runtime sql for node "model.brasilibid.stg_licitacoes"
+[0m15:23:34.140964 [debug] [Thread-1 (]: Using postgres connection "model.brasilibid.stg_licitacoes"
+[0m15:23:34.141966 [debug] [Thread-1 (]: On model.brasilibid.stg_licitacoes: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "node_id": "model.brasilibid.stg_licitacoes"} */
+
+  create view "neondb"."public_staging"."stg_licitacoes__dbt_tmp"
+    
+    
+  as (
+    -- Staging: limpa e tipifica os dados brutos
+SELECT
+    numero_controle_pncp,
+    orgao_cnpj,
+    TRIM(orgao_nome)                                    AS orgao_nome,
+    modalidade_id,
+    TRIM(modalidade_nome)                               AS modalidade_nome,
+    TRIM(modo_disputa_nome)                             AS modo_disputa_nome,
+    TRIM(objeto_compra)                                 AS objeto_compra,
+    COALESCE(valor_total_estimado, 0)                   AS valor_estimado,
+    COALESCE(valor_homologado, 0)                       AS valor_homologado,
+    UPPER(TRIM(uf_sigla))                               AS uf_sigla,
+    TRIM(municipio_nome)                                AS municipio_nome,
+    TRIM(situacao_nome)                                 AS situacao_nome,
+    data_publicacao::DATE                               AS data_publicacao,
+    data_encerramento::DATE                             AS data_encerramento,
+    link_edital,
+    numero_compra,
+    ano_compra,
+    ingested_at
+FROM "neondb"."public"."licitacoes"
+WHERE numero_controle_pncp IS NOT NULL
+  );
+[0m15:23:34.142966 [debug] [Thread-1 (]: Opening a new connection, currently in state init
+[0m15:23:35.330040 [debug] [Thread-1 (]: SQL status: CREATE VIEW in 1.187 seconds
+[0m15:23:35.339049 [debug] [Thread-1 (]: Using postgres connection "model.brasilibid.stg_licitacoes"
+[0m15:23:35.340051 [debug] [Thread-1 (]: On model.brasilibid.stg_licitacoes: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "node_id": "model.brasilibid.stg_licitacoes"} */
+alter table "neondb"."public_staging"."stg_licitacoes__dbt_tmp" rename to "stg_licitacoes"
+[0m15:23:35.486452 [debug] [Thread-1 (]: SQL status: ALTER TABLE in 0.146 seconds
+[0m15:23:35.508366 [debug] [Thread-1 (]: On model.brasilibid.stg_licitacoes: COMMIT
+[0m15:23:35.509366 [debug] [Thread-1 (]: Using postgres connection "model.brasilibid.stg_licitacoes"
+[0m15:23:35.509366 [debug] [Thread-1 (]: On model.brasilibid.stg_licitacoes: COMMIT
+[0m15:23:35.660409 [debug] [Thread-1 (]: SQL status: COMMIT in 0.150 seconds
+[0m15:23:35.671410 [debug] [Thread-1 (]: Applying DROP to: "neondb"."public_staging"."stg_licitacoes__dbt_backup"
+[0m15:23:35.678410 [debug] [Thread-1 (]: Using postgres connection "model.brasilibid.stg_licitacoes"
+[0m15:23:35.679410 [debug] [Thread-1 (]: On model.brasilibid.stg_licitacoes: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "node_id": "model.brasilibid.stg_licitacoes"} */
+drop view if exists "neondb"."public_staging"."stg_licitacoes__dbt_backup" cascade
+[0m15:23:35.831285 [debug] [Thread-1 (]: SQL status: DROP VIEW in 0.150 seconds
+[0m15:23:35.833288 [debug] [Thread-1 (]: On model.brasilibid.stg_licitacoes: Close
+[0m15:23:35.843292 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'c668086e-ec3c-48cc-a05b-1f58d1aa1c44', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002AAFE307C20>]}
+[0m15:23:35.844295 [info ] [Thread-1 (]: 1 of 6 OK created sql view model public_staging.stg_licitacoes ................. [[32mCREATE VIEW[0m in 1.75s]
+[0m15:23:35.845293 [debug] [Thread-1 (]: Finished running node model.brasilibid.stg_licitacoes
+[0m15:23:35.846293 [debug] [Thread-3 (]: Began running node model.brasilibid.mart_por_modalidade
+[0m15:23:35.847295 [debug] [Thread-4 (]: Began running node model.brasilibid.mart_por_orgao
+[0m15:23:35.848295 [debug] [Thread-2 (]: Began running node model.brasilibid.mart_por_uf
+[0m15:23:35.848295 [debug] [Thread-1 (]: Began running node model.brasilibid.mart_recentes
+[0m15:23:35.848295 [info ] [Thread-3 (]: 2 of 6 START sql table model public_mart.mart_por_modalidade ................... [RUN]
+[0m15:23:35.849444 [info ] [Thread-4 (]: 3 of 6 START sql table model public_mart.mart_por_orgao ........................ [RUN]
+[0m15:23:35.850446 [info ] [Thread-2 (]: 4 of 6 START sql table model public_mart.mart_por_uf ........................... [RUN]
+[0m15:23:35.851448 [debug] [Thread-3 (]: Acquiring new postgres connection 'model.brasilibid.mart_por_modalidade'
+[0m15:23:35.850446 [info ] [Thread-1 (]: 5 of 6 START sql table model public_mart.mart_recentes ......................... [RUN]
+[0m15:23:35.852446 [debug] [Thread-4 (]: Acquiring new postgres connection 'model.brasilibid.mart_por_orgao'
+[0m15:23:35.852446 [debug] [Thread-2 (]: Acquiring new postgres connection 'model.brasilibid.mart_por_uf'
+[0m15:23:35.853447 [debug] [Thread-3 (]: Began compiling node model.brasilibid.mart_por_modalidade
+[0m15:23:35.853447 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.brasilibid.stg_licitacoes, now model.brasilibid.mart_recentes)
+[0m15:23:35.854447 [debug] [Thread-4 (]: Began compiling node model.brasilibid.mart_por_orgao
+[0m15:23:35.854447 [debug] [Thread-2 (]: Began compiling node model.brasilibid.mart_por_uf
+[0m15:23:35.857445 [debug] [Thread-3 (]: Writing injected SQL for node "model.brasilibid.mart_por_modalidade"
+[0m15:23:35.857445 [debug] [Thread-1 (]: Began compiling node model.brasilibid.mart_recentes
+[0m15:23:35.860445 [debug] [Thread-4 (]: Writing injected SQL for node "model.brasilibid.mart_por_orgao"
+[0m15:23:35.863448 [debug] [Thread-2 (]: Writing injected SQL for node "model.brasilibid.mart_por_uf"
+[0m15:23:35.867449 [debug] [Thread-1 (]: Writing injected SQL for node "model.brasilibid.mart_recentes"
+[0m15:23:35.869446 [debug] [Thread-4 (]: Began executing node model.brasilibid.mart_por_orgao
+[0m15:23:35.870445 [debug] [Thread-3 (]: Began executing node model.brasilibid.mart_por_modalidade
+[0m15:23:35.884446 [debug] [Thread-1 (]: Began executing node model.brasilibid.mart_recentes
+[0m15:23:35.910447 [debug] [Thread-3 (]: Writing runtime sql for node "model.brasilibid.mart_por_modalidade"
+[0m15:23:35.910447 [debug] [Thread-2 (]: Began executing node model.brasilibid.mart_por_uf
+[0m15:23:35.911447 [debug] [Thread-4 (]: Writing runtime sql for node "model.brasilibid.mart_por_orgao"
+[0m15:23:35.918445 [debug] [Thread-1 (]: Writing runtime sql for node "model.brasilibid.mart_recentes"
+[0m15:23:35.923445 [debug] [Thread-2 (]: Writing runtime sql for node "model.brasilibid.mart_por_uf"
+[0m15:23:35.925447 [debug] [Thread-3 (]: Using postgres connection "model.brasilibid.mart_por_modalidade"
+[0m15:23:35.926446 [debug] [Thread-2 (]: Using postgres connection "model.brasilibid.mart_por_uf"
+[0m15:23:35.926446 [debug] [Thread-3 (]: On model.brasilibid.mart_por_modalidade: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "node_id": "model.brasilibid.mart_por_modalidade"} */
+
+  
+    
+
+  create  table "neondb"."public_mart"."mart_por_modalidade__dbt_tmp"
+  
+  
+    as
+  
+  (
+    -- Mart: distribuição por modalidade de licitação
+SELECT
+    modalidade_nome,
+    modo_disputa_nome,
+    COUNT(*)                                            AS total_licitacoes,
+    SUM(valor_estimado)                                 AS valor_total_estimado,
+    ROUND(
+        100.0 * COUNT(*) / SUM(COUNT(*)) OVER ()
+    , 2)                                                AS pct_total
+FROM "neondb"."public_staging"."stg_licitacoes"
+WHERE modalidade_nome IS NOT NULL
+GROUP BY modalidade_nome, modo_disputa_nome
+ORDER BY total_licitacoes DESC
+  );
+  
+[0m15:23:35.927447 [debug] [Thread-2 (]: On model.brasilibid.mart_por_uf: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "node_id": "model.brasilibid.mart_por_uf"} */
+
+  
+    
+
+  create  table "neondb"."public_mart"."mart_por_uf__dbt_tmp"
+  
+  
+    as
+  
+  (
+    -- Mart: licitações por UF — usado no mapa do Power BI
+SELECT
+    uf_sigla,
+    COUNT(*)                                            AS total_licitacoes,
+    SUM(valor_estimado)                                 AS valor_total_estimado,
+    SUM(valor_homologado)                               AS valor_total_homologado,
+    AVG(valor_estimado)                                 AS valor_medio_estimado,
+    COUNT(DISTINCT orgao_cnpj)                          AS total_orgaos
+FROM "neondb"."public_staging"."stg_licitacoes"
+WHERE uf_sigla IS NOT NULL
+GROUP BY uf_sigla
+ORDER BY total_licitacoes DESC
+  );
+  
+[0m15:23:35.928446 [debug] [Thread-3 (]: Opening a new connection, currently in state init
+[0m15:23:35.929446 [debug] [Thread-4 (]: Using postgres connection "model.brasilibid.mart_por_orgao"
+[0m15:23:35.929446 [debug] [Thread-1 (]: Using postgres connection "model.brasilibid.mart_recentes"
+[0m15:23:35.930446 [debug] [Thread-2 (]: Opening a new connection, currently in state init
+[0m15:23:35.931446 [debug] [Thread-4 (]: On model.brasilibid.mart_por_orgao: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "node_id": "model.brasilibid.mart_por_orgao"} */
+
+  
+    
+
+  create  table "neondb"."public_mart"."mart_por_orgao__dbt_tmp"
+  
+  
+    as
+  
+  (
+    -- Mart: top órgãos por volume de licitações e valor
+SELECT
+    orgao_cnpj,
+    orgao_nome,
+    uf_sigla,
+    COUNT(*)                                            AS total_licitacoes,
+    SUM(valor_estimado)                                 AS valor_total_estimado,
+    SUM(valor_homologado)                               AS valor_total_homologado,
+    MAX(data_publicacao)                                AS ultima_publicacao
+FROM "neondb"."public_staging"."stg_licitacoes"
+WHERE orgao_nome IS NOT NULL
+GROUP BY orgao_cnpj, orgao_nome, uf_sigla
+ORDER BY total_licitacoes DESC
+  );
+  
+[0m15:23:35.931446 [debug] [Thread-1 (]: On model.brasilibid.mart_recentes: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "node_id": "model.brasilibid.mart_recentes"} */
+
+  
+    
+
+  create  table "neondb"."public_mart"."mart_recentes__dbt_tmp"
+  
+  
+    as
+  
+  (
+    -- Mart: últimas 500 licitações — tabela detalhada no Power BI
+SELECT
+    numero_controle_pncp,
+    orgao_nome,
+    uf_sigla,
+    municipio_nome,
+    modalidade_nome,
+    objeto_compra,
+    valor_estimado,
+    valor_homologado,
+    situacao_nome,
+    data_publicacao,
+    data_encerramento,
+    link_edital
+FROM "neondb"."public_staging"."stg_licitacoes"
+ORDER BY data_publicacao DESC
+LIMIT 500
+  );
+  
+[0m15:23:35.932446 [debug] [Thread-4 (]: Opening a new connection, currently in state init
+[0m15:23:35.933447 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m15:23:37.127254 [debug] [Thread-3 (]: SQL status: SELECT 25 in 1.199 seconds
+[0m15:23:37.134352 [debug] [Thread-3 (]: Using postgres connection "model.brasilibid.mart_por_modalidade"
+[0m15:23:37.134352 [debug] [Thread-3 (]: On model.brasilibid.mart_por_modalidade: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "node_id": "model.brasilibid.mart_por_modalidade"} */
+alter table "neondb"."public_mart"."mart_por_modalidade__dbt_tmp" rename to "mart_por_modalidade"
+[0m15:23:37.152984 [debug] [Thread-2 (]: SQL status: SELECT 27 in 1.223 seconds
+[0m15:23:37.156231 [debug] [Thread-2 (]: Using postgres connection "model.brasilibid.mart_por_uf"
+[0m15:23:37.157232 [debug] [Thread-1 (]: SQL status: SELECT 500 in 1.224 seconds
+[0m15:23:37.157232 [debug] [Thread-2 (]: On model.brasilibid.mart_por_uf: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "node_id": "model.brasilibid.mart_por_uf"} */
+alter table "neondb"."public_mart"."mart_por_uf__dbt_tmp" rename to "mart_por_uf"
+[0m15:23:37.162231 [debug] [Thread-1 (]: Using postgres connection "model.brasilibid.mart_recentes"
+[0m15:23:37.163232 [debug] [Thread-1 (]: On model.brasilibid.mart_recentes: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "node_id": "model.brasilibid.mart_recentes"} */
+alter table "neondb"."public_mart"."mart_recentes__dbt_tmp" rename to "mart_recentes"
+[0m15:23:37.190836 [debug] [Thread-4 (]: SQL status: SELECT 1430 in 1.258 seconds
+[0m15:23:37.193835 [debug] [Thread-4 (]: Using postgres connection "model.brasilibid.mart_por_orgao"
+[0m15:23:37.193835 [debug] [Thread-4 (]: On model.brasilibid.mart_por_orgao: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "node_id": "model.brasilibid.mart_por_orgao"} */
+alter table "neondb"."public_mart"."mart_por_orgao__dbt_tmp" rename to "mart_por_orgao"
+[0m15:23:37.282863 [debug] [Thread-3 (]: SQL status: ALTER TABLE in 0.147 seconds
+[0m15:23:37.283958 [debug] [Thread-3 (]: On model.brasilibid.mart_por_modalidade: COMMIT
+[0m15:23:37.284940 [debug] [Thread-3 (]: Using postgres connection "model.brasilibid.mart_por_modalidade"
+[0m15:23:37.284940 [debug] [Thread-3 (]: On model.brasilibid.mart_por_modalidade: COMMIT
+[0m15:23:37.310980 [debug] [Thread-1 (]: SQL status: ALTER TABLE in 0.147 seconds
+[0m15:23:37.312085 [debug] [Thread-1 (]: On model.brasilibid.mart_recentes: COMMIT
+[0m15:23:37.313074 [debug] [Thread-1 (]: Using postgres connection "model.brasilibid.mart_recentes"
+[0m15:23:37.313074 [debug] [Thread-1 (]: On model.brasilibid.mart_recentes: COMMIT
+[0m15:23:37.313991 [debug] [Thread-2 (]: SQL status: ALTER TABLE in 0.151 seconds
+[0m15:23:37.315991 [debug] [Thread-2 (]: On model.brasilibid.mart_por_uf: COMMIT
+[0m15:23:37.315991 [debug] [Thread-2 (]: Using postgres connection "model.brasilibid.mart_por_uf"
+[0m15:23:37.315991 [debug] [Thread-2 (]: On model.brasilibid.mart_por_uf: COMMIT
+[0m15:23:37.349443 [debug] [Thread-4 (]: SQL status: ALTER TABLE in 0.155 seconds
+[0m15:23:37.350451 [debug] [Thread-4 (]: On model.brasilibid.mart_por_orgao: COMMIT
+[0m15:23:37.350451 [debug] [Thread-4 (]: Using postgres connection "model.brasilibid.mart_por_orgao"
+[0m15:23:37.351449 [debug] [Thread-4 (]: On model.brasilibid.mart_por_orgao: COMMIT
+[0m15:23:37.433514 [debug] [Thread-3 (]: SQL status: COMMIT in 0.148 seconds
+[0m15:23:37.436524 [debug] [Thread-3 (]: Applying DROP to: "neondb"."public_mart"."mart_por_modalidade__dbt_backup"
+[0m15:23:37.439531 [debug] [Thread-3 (]: Using postgres connection "model.brasilibid.mart_por_modalidade"
+[0m15:23:37.439531 [debug] [Thread-3 (]: On model.brasilibid.mart_por_modalidade: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "node_id": "model.brasilibid.mart_por_modalidade"} */
+drop table if exists "neondb"."public_mart"."mart_por_modalidade__dbt_backup" cascade
+[0m15:23:37.462085 [debug] [Thread-1 (]: SQL status: COMMIT in 0.148 seconds
+[0m15:23:37.465130 [debug] [Thread-1 (]: Applying DROP to: "neondb"."public_mart"."mart_recentes__dbt_backup"
+[0m15:23:37.466170 [debug] [Thread-1 (]: Using postgres connection "model.brasilibid.mart_recentes"
+[0m15:23:37.466170 [debug] [Thread-1 (]: On model.brasilibid.mart_recentes: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "node_id": "model.brasilibid.mart_recentes"} */
+drop table if exists "neondb"."public_mart"."mart_recentes__dbt_backup" cascade
+[0m15:23:37.466170 [debug] [Thread-2 (]: SQL status: COMMIT in 0.150 seconds
+[0m15:23:37.468092 [debug] [Thread-2 (]: Applying DROP to: "neondb"."public_mart"."mart_por_uf__dbt_backup"
+[0m15:23:37.469092 [debug] [Thread-2 (]: Using postgres connection "model.brasilibid.mart_por_uf"
+[0m15:23:37.469092 [debug] [Thread-2 (]: On model.brasilibid.mart_por_uf: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "node_id": "model.brasilibid.mart_por_uf"} */
+drop table if exists "neondb"."public_mart"."mart_por_uf__dbt_backup" cascade
+[0m15:23:37.505896 [debug] [Thread-4 (]: SQL status: COMMIT in 0.154 seconds
+[0m15:23:37.508802 [debug] [Thread-4 (]: Applying DROP to: "neondb"."public_mart"."mart_por_orgao__dbt_backup"
+[0m15:23:37.508802 [debug] [Thread-4 (]: Using postgres connection "model.brasilibid.mart_por_orgao"
+[0m15:23:37.509802 [debug] [Thread-4 (]: On model.brasilibid.mart_por_orgao: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "node_id": "model.brasilibid.mart_por_orgao"} */
+drop table if exists "neondb"."public_mart"."mart_por_orgao__dbt_backup" cascade
+[0m15:23:37.587457 [debug] [Thread-3 (]: SQL status: DROP TABLE in 0.147 seconds
+[0m15:23:37.588470 [debug] [Thread-3 (]: On model.brasilibid.mart_por_modalidade: Close
+[0m15:23:37.589463 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'c668086e-ec3c-48cc-a05b-1f58d1aa1c44', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002AA84258A40>]}
+[0m15:23:37.590463 [info ] [Thread-3 (]: 2 of 6 OK created sql table model public_mart.mart_por_modalidade .............. [[32mSELECT 25[0m in 1.74s]
+[0m15:23:37.590708 [debug] [Thread-3 (]: Finished running node model.brasilibid.mart_por_modalidade
+[0m15:23:37.591725 [debug] [Thread-3 (]: Began running node model.brasilibid.mart_timeline
+[0m15:23:37.591725 [info ] [Thread-3 (]: 6 of 6 START sql table model public_mart.mart_timeline ......................... [RUN]
+[0m15:23:37.591725 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.brasilibid.mart_por_modalidade, now model.brasilibid.mart_timeline)
+[0m15:23:37.592756 [debug] [Thread-3 (]: Began compiling node model.brasilibid.mart_timeline
+[0m15:23:37.596793 [debug] [Thread-3 (]: Writing injected SQL for node "model.brasilibid.mart_timeline"
+[0m15:23:37.597722 [debug] [Thread-3 (]: Began executing node model.brasilibid.mart_timeline
+[0m15:23:37.678234 [debug] [Thread-1 (]: SQL status: DROP TABLE in 0.212 seconds
+[0m15:23:37.683233 [debug] [Thread-3 (]: Writing runtime sql for node "model.brasilibid.mart_timeline"
+[0m15:23:37.684232 [debug] [Thread-2 (]: SQL status: DROP TABLE in 0.214 seconds
+[0m15:23:37.686234 [debug] [Thread-1 (]: On model.brasilibid.mart_recentes: Close
+[0m15:23:37.687234 [debug] [Thread-4 (]: SQL status: DROP TABLE in 0.177 seconds
+[0m15:23:37.689245 [debug] [Thread-2 (]: On model.brasilibid.mart_por_uf: Close
+[0m15:23:37.691249 [debug] [Thread-4 (]: On model.brasilibid.mart_por_orgao: Close
+[0m15:23:37.691249 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'c668086e-ec3c-48cc-a05b-1f58d1aa1c44', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002AA843816D0>]}
+[0m15:23:37.693245 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'c668086e-ec3c-48cc-a05b-1f58d1aa1c44', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002AA843AAD80>]}
+[0m15:23:37.695234 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'c668086e-ec3c-48cc-a05b-1f58d1aa1c44', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002AA843AB770>]}
+[0m15:23:37.695234 [debug] [Thread-3 (]: Using postgres connection "model.brasilibid.mart_timeline"
+[0m15:23:37.692233 [info ] [Thread-1 (]: 5 of 6 OK created sql table model public_mart.mart_recentes .................... [[32mSELECT 500[0m in 1.84s]
+[0m15:23:37.697233 [debug] [Thread-3 (]: On model.brasilibid.mart_timeline: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "node_id": "model.brasilibid.mart_timeline"} */
+
+  
+    
+
+  create  table "neondb"."public_mart"."mart_timeline__dbt_tmp"
+  
+  
+    as
+  
+  (
+    -- Mart: série temporal diária — gráfico de linha no Power BI
+SELECT
+    data_publicacao,
+    modalidade_nome,
+    COUNT(*)                                            AS total_licitacoes,
+    SUM(valor_estimado)                                 AS valor_total_estimado
+FROM "neondb"."public_staging"."stg_licitacoes"
+WHERE data_publicacao IS NOT NULL
+GROUP BY data_publicacao, modalidade_nome
+ORDER BY data_publicacao DESC
+  );
+  
+[0m15:23:37.694234 [info ] [Thread-4 (]: 3 of 6 OK created sql table model public_mart.mart_por_orgao ................... [[32mSELECT 1430[0m in 1.84s]
+[0m15:23:37.698233 [debug] [Thread-1 (]: Finished running node model.brasilibid.mart_recentes
+[0m15:23:37.696233 [info ] [Thread-2 (]: 4 of 6 OK created sql table model public_mart.mart_por_uf ...................... [[32mSELECT 27[0m in 1.84s]
+[0m15:23:37.699242 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m15:23:37.699242 [debug] [Thread-4 (]: Finished running node model.brasilibid.mart_por_orgao
+[0m15:23:37.700233 [debug] [Thread-2 (]: Finished running node model.brasilibid.mart_por_uf
+[0m15:23:38.938046 [debug] [Thread-3 (]: SQL status: SELECT 19 in 1.239 seconds
+[0m15:23:38.941052 [debug] [Thread-3 (]: Using postgres connection "model.brasilibid.mart_timeline"
+[0m15:23:38.941052 [debug] [Thread-3 (]: On model.brasilibid.mart_timeline: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "node_id": "model.brasilibid.mart_timeline"} */
+alter table "neondb"."public_mart"."mart_timeline__dbt_tmp" rename to "mart_timeline"
+[0m15:23:39.094746 [debug] [Thread-3 (]: SQL status: ALTER TABLE in 0.153 seconds
+[0m15:23:39.095856 [debug] [Thread-3 (]: On model.brasilibid.mart_timeline: COMMIT
+[0m15:23:39.096857 [debug] [Thread-3 (]: Using postgres connection "model.brasilibid.mart_timeline"
+[0m15:23:39.096857 [debug] [Thread-3 (]: On model.brasilibid.mart_timeline: COMMIT
+[0m15:23:39.251968 [debug] [Thread-3 (]: SQL status: COMMIT in 0.154 seconds
+[0m15:23:39.255001 [debug] [Thread-3 (]: Applying DROP to: "neondb"."public_mart"."mart_timeline__dbt_backup"
+[0m15:23:39.255001 [debug] [Thread-3 (]: Using postgres connection "model.brasilibid.mart_timeline"
+[0m15:23:39.256000 [debug] [Thread-3 (]: On model.brasilibid.mart_timeline: /* {"app": "dbt", "dbt_version": "1.12.0b1", "profile_name": "brasilibid", "target_name": "prod", "node_id": "model.brasilibid.mart_timeline"} */
+drop table if exists "neondb"."public_mart"."mart_timeline__dbt_backup" cascade
+[0m15:23:39.408580 [debug] [Thread-3 (]: SQL status: DROP TABLE in 0.152 seconds
+[0m15:23:39.409587 [debug] [Thread-3 (]: On model.brasilibid.mart_timeline: Close
+[0m15:23:39.410580 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'c668086e-ec3c-48cc-a05b-1f58d1aa1c44', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002AA843AB200>]}
+[0m15:23:39.411579 [info ] [Thread-3 (]: 6 of 6 OK created sql table model public_mart.mart_timeline .................... [[32mSELECT 19[0m in 1.82s]
+[0m15:23:39.411579 [debug] [Thread-3 (]: Finished running node model.brasilibid.mart_timeline
+[0m15:23:39.413579 [debug] [MainThread]: On master: COMMIT
+[0m15:23:39.413579 [debug] [MainThread]: Using postgres connection "master"
+[0m15:23:39.415579 [debug] [MainThread]: On master: COMMIT
+[0m15:23:39.415579 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m15:23:40.604660 [debug] [MainThread]: SQL status: COMMIT in 1.189 seconds
+[0m15:23:40.605661 [debug] [MainThread]: On master: Close
+[0m15:23:40.605661 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m15:23:40.606659 [debug] [MainThread]: Connection 'create_neondb_public_mart' was properly closed.
+[0m15:23:40.606659 [debug] [MainThread]: Connection 'create_neondb_public_staging' was properly closed.
+[0m15:23:40.606659 [debug] [MainThread]: Connection 'list_neondb_public_mart' was properly closed.
+[0m15:23:40.606659 [debug] [MainThread]: Connection 'list_neondb_public_staging' was properly closed.
+[0m15:23:40.607659 [debug] [MainThread]: Connection 'model.brasilibid.mart_recentes' was properly closed.
+[0m15:23:40.607659 [debug] [MainThread]: Connection 'model.brasilibid.mart_timeline' was properly closed.
+[0m15:23:40.607659 [debug] [MainThread]: Connection 'model.brasilibid.mart_por_orgao' was properly closed.
+[0m15:23:40.607659 [debug] [MainThread]: Connection 'model.brasilibid.mart_por_uf' was properly closed.
+[0m15:23:40.608660 [info ] [MainThread]: 
+[0m15:23:40.608660 [info ] [MainThread]: Finished running 5 table models, 1 view model in 0 hours 0 minutes and 12.33 seconds (12.33s).
+[0m15:23:40.610673 [debug] [MainThread]: Command end result
+[0m15:23:40.640662 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\joaop\OneDrive\Desktop\brasilibid\dbt\target\manifest.json
+[0m15:23:40.646661 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\joaop\OneDrive\Desktop\brasilibid\dbt\target\semantic_manifest.json
+[0m15:23:40.657662 [debug] [MainThread]: Wrote artifact RunExecutionResult to C:\Users\joaop\OneDrive\Desktop\brasilibid\dbt\target\run_results.json
+[0m15:23:40.657662 [info ] [MainThread]: 
+[0m15:23:40.658663 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m15:23:40.659662 [info ] [MainThread]: 
+[0m15:23:40.659662 [info ] [MainThread]: Done. PASS=6 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=6
+[0m15:23:40.661659 [debug] [MainThread]: Command `dbt run` succeeded at 15:23:40.661659 after 15.67 seconds
+[0m15:23:40.661659 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002AA80E2D4F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002AA802DBDA0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002AA80740C20>]}
+[0m15:23:40.662661 [debug] [MainThread]: Flushing usage events
+[0m15:23:41.259791 [debug] [MainThread]: An error was encountered while trying to flush usage events
