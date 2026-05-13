@@ -3,11 +3,12 @@ BrasilBid — Monitor de Licitações Públicas
 App Streamlit com dados ao vivo do PNCP via PostgreSQL (Neon)
 """
 import os
+import re
 
 import pandas as pd
 import plotly.express as px
 import streamlit as st
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 
 # ── Configuração da página ─────────────────────────────────────────────────────
 st.set_page_config(
@@ -62,24 +63,22 @@ st.markdown("""
 # ── Conexão BD ────────────────────────────────────────────────────────────────
 @st.cache_resource
 def get_engine():
-    # Streamlit Cloud secrets têm prioridade; fallback para env var local
-    url = st.secrets.get("DATABASE_URL") or os.environ.get("DATABASE_URL")
+    url = st.secrets.get("DATABASE_URL") or os.environ.get("DATABASE_URL", "")
     if not url:
-        st.error("❌ DATABASE_URL não configurado. Vá em Settings → Secrets e adicione a variável.")
+        st.error("❌ DATABASE_URL não configurado nas Secrets do Streamlit Cloud.")
         st.stop()
+    # psycopg3 não suporta channel_binding na URL — remover antes de conectar
+    url = re.sub(r"[&?]channel_binding=[^&]*", "", url)
+    # Forçar dialeto psycopg3
     url = url.replace("postgresql://", "postgresql+psycopg://", 1)
     url = url.replace("postgres://", "postgresql+psycopg://", 1)
-    return create_engine(url, pool_pre_ping=True)
+    return create_engine(url, pool_pre_ping=True, connect_args={"sslmode": "require"})
 
 
 @st.cache_data(ttl=3600, show_spinner="Carregando dados...")
 def load_mart(table: str) -> pd.DataFrame:
-    try:
-        with get_engine().connect() as conn:
-            return pd.read_sql(f"SELECT * FROM public_mart.{table}", conn)
-    except Exception as e:
-        st.error(f"❌ Erro ao carregar `{table}`: {e}")
-        st.stop()
+    with get_engine().connect() as conn:
+        return pd.read_sql(f"SELECT * FROM public_mart.{table}", conn)
 
 
 def fmt_brl(v) -> str:
