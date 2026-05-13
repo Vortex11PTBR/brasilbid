@@ -4,11 +4,12 @@ App Streamlit com dados ao vivo do PNCP via PostgreSQL (Neon)
 """
 import os
 import re
+import ssl
 
 import pandas as pd
 import plotly.express as px
 import streamlit as st
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine
 
 # ── Configuração da página ─────────────────────────────────────────────────────
 st.set_page_config(
@@ -67,12 +68,15 @@ def get_engine():
     if not url:
         st.error("❌ DATABASE_URL não configurado nas Secrets do Streamlit Cloud.")
         st.stop()
-    # psycopg3 não suporta channel_binding na URL — remover antes de conectar
+    # pg8000 não suporta esses parâmetros na URL — remover
     url = re.sub(r"[&?]channel_binding=[^&]*", "", url)
-    # Forçar dialeto psycopg3
-    url = url.replace("postgresql://", "postgresql+psycopg://", 1)
-    url = url.replace("postgres://", "postgresql+psycopg://", 1)
-    return create_engine(url, pool_pre_ping=True, connect_args={"sslmode": "require"})
+    url = re.sub(r"[&?]sslmode=[^&]*", "", url)
+    # Dialeto pg8000 (puro Python, compatível com qualquer versão)
+    url = url.replace("postgresql://", "postgresql+pg8000://", 1)
+    url = url.replace("postgres://", "postgresql+pg8000://", 1)
+    # SSL via contexto nativo Python (necessário para Neon)
+    ssl_context = ssl.create_default_context()
+    return create_engine(url, connect_args={"ssl_context": ssl_context})
 
 
 @st.cache_data(ttl=3600, show_spinner="Carregando dados...")

@@ -1,5 +1,5 @@
 requests==2.32.3
-psycopg[binary]>=3.1
+pg8000>=1.30.5
 sqlalchemy==2.0.30
 python-dotenv==1.0.1
 streamlit==1.45.0
