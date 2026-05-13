@@ -89,8 +89,10 @@ def fmt_brl(v) -> str:
     """Formata número como R$ 1.234.567"""
     if pd.isna(v):
         return "—"
+    if v >= 1_000_000_000:
+        return f"R$ {v/1_000_000_000:.1f} Bi"
     if v >= 1_000_000:
-        return f"R$ {v/1_000_000:.1f} Mi"
+        return f"R$ {v/1_000_000:,.1f} Mi".replace(",", ".")
     return f"R$ {v:,.0f}".replace(",", ".")
 
 
